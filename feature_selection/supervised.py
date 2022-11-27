@@ -88,7 +88,6 @@ def boruta_selection(df_norm, label, k):
     score = pd.Series(selected_rf_features.Ranking)
     score.index = selected_rf_features.Feature
     score.sort_values(ascending=True, inplace=True)
-    print(score)
     return list(score[:min(k, len(df_norm.columns))].index)
 
 # 6
@@ -139,8 +138,34 @@ def treebased_selection(df_norm, label, k):
 def corr_selection(df_norm, label, k):
     featureTargetCorr = []
     for col in df_norm:
-        featureTargetCorr.append(pearsonr(df_norm[col], label)[0])
+        featureTargetCorr.append(
+            pearsonr(df_norm[col].astype('float64'), label.astype('float64'))[0])
     score = pd.Series(np.absolute(featureTargetCorr))
     score.index = df_norm.columns
     score.sort_values(ascending=False, inplace=True)
     return list(score[:min(k, len(df_norm.columns))].index)
+
+
+def get_features_selected(df, label, k):
+    features_selected = {}
+    print("Selecting Features with correlation")
+    features_selected["corr"] = corr_selection(df, label, k)
+    print("Selecting Features with tree")
+    features_selected["tree"] = treebased_selection(df, label, k)
+    print("Selecting Features with variance")
+    features_selected["var"] = variance_selection(df, label, k)
+    print("Selecting Features with logistic regression")
+    features_selected["lrs"] = logistic_regression_selection(df, label, k)
+    print("Selecting Features with rfe")
+    features_selected["rfe"] = rfe_selection(df, label, k)
+    print("Selecting Features with boruta")
+    features_selected["bor"] = boruta_selection(df, label, k)
+    print("Selecting Features with lasso")
+    features_selected["lass"] = Lasso_selection(df, label, k)
+    print("Selecting Features with mutual info")
+    features_selected["muin"] = Mutualinfo_selection(df, label, k)
+    print("Selecting Features with chi test")
+    features_selected["chi"] = chitest_selection(df, label, k)
+    print("Selecting Features with random forest")
+    features_selected["rfc"] = randomforest_Selection(df, label, k)
+    return features_selected
