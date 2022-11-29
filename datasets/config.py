@@ -74,7 +74,7 @@ data_files = [
     {
         "name": "breast",
         "drop_columns": ["id", "Unnamed: 32"],
-        "encode_columns": [],
+        "encode_columns": ["diagnosis"],
         "target": "diagnosis",
         "sep": ",",
         "no_scale":["diagnosis"]
