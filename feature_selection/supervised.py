@@ -8,7 +8,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier
 from boruta import BorutaPy
 from sklearn.model_selection import train_test_split
-from scipy.stats import pearsonr, spearmanr
+from scipy.stats import pearsonr
 
 # 1
 

@@ -5,7 +5,8 @@ data_files = [
         "encode_columns": ["Species"],
         "target": "Species",
         "sep": ",",
-        "no_scale":["Species"]
+        "no_scale":["Species"],
+        "is_multiclass":True
     },
     {
         "name": "parkinsons",
@@ -13,7 +14,8 @@ data_files = [
         "encode_columns": ["name"],
         "target": "status",
         "sep": ",",
-        "no_scale":["status"]
+        "no_scale":["status"],
+        "is_multiclass":False
     },
     {
         "name": "cirrhosis",
@@ -21,7 +23,8 @@ data_files = [
         "encode_columns": ["Drug", "Status", "Sex", "Ascites", "Hepatomegaly", "Spiders", "Edema", "Stage"],
         "target": "Stage",
         "sep": ",",
-        "no_scale":["Stage", "Drug", "Status", "Sex", "Ascites", "Hepatomegaly", "Spiders", "Edema"]
+        "no_scale":["Stage", "Drug", "Status", "Sex", "Ascites", "Hepatomegaly", "Spiders", "Edema"],
+        "is_multiclass":True
     },
     {
         "name": "diabetes",
@@ -29,7 +32,8 @@ data_files = [
         "encode_columns": [],
         "target": "Outcome",
         "sep": ",",
-        "no_scale":["Outcome", "Age", "BMI", "Pregnancies", "Glucose", "BloodPressure", "SkinThickness", "Insulin", "DiabetesPedigreeFunction"]
+        "no_scale":["Outcome", "Age", "BMI", "Pregnancies", "Glucose", "BloodPressure", "SkinThickness", "Insulin", "DiabetesPedigreeFunction"],
+        "is_multiclass":False
     },
     {
         "name": "heart_disease",
@@ -37,7 +41,8 @@ data_files = [
         "encode_columns": [],
         "target": "condition",
         "sep": ",",
-        "no_scale":["condition", "sex", "cp", "fbs", "restecg", "exang", "slope", "ca", "thal"]
+        "no_scale":["condition", "sex", "cp", "fbs", "restecg", "exang", "slope", "ca", "thal"],
+        "is_multiclass":False
     },
     {
         "name": "sonar",
@@ -45,7 +50,8 @@ data_files = [
         "encode_columns": ["Class"],
         "target": "Class",
         "sep": ",",
-        "no_scale":["Class"]
+        "no_scale":["Class"],
+        "is_multiclass":False
     },
     {
         "name": "stroke",
@@ -53,7 +59,8 @@ data_files = [
         "encode_columns": ["gender", "ever_married", "work_type", "Residence_type", "smoking_status"],
         "target": "stroke",
         "sep": ",",
-        "no_scale":["stroke", "gender", "ever_married", "work_type", "Residence_type", "smoking_status"]
+        "no_scale":["stroke", "gender", "ever_married", "work_type", "Residence_type", "smoking_status"],
+        "is_multiclass":False
     },
     # {
     #     "name": "covtype",
@@ -61,7 +68,8 @@ data_files = [
     #     "encode_columns": [],
     #     "target": "Cover_Type",
     #     "sep": ",",
-    #     "no_scale":["Cover_Type"]
+    #     "no_scale":["Cover_Type"],
+    #     "is_multiclass":True
     # },
     {
         "name": "wine",
@@ -69,7 +77,8 @@ data_files = [
         "encode_columns": [],
         "target": "quality",
         "sep": ";",
-        "no_scale":["quality"]
+        "no_scale":["quality"],
+        "is_multiclass":True
     },
     {
         "name": "breast",
@@ -77,6 +86,7 @@ data_files = [
         "encode_columns": ["diagnosis"],
         "target": "diagnosis",
         "sep": ",",
-        "no_scale":["diagnosis"]
+        "no_scale":["diagnosis"],
+        "is_multiclass":False
     }
 ]

@@ -34,8 +34,16 @@ def write_results(file, results, fs_method, k):
                    ","+get_score(results[result]))
 
 
-def get_result(df, target):
-    model1 = LogisticRegression(max_iter=10000)
+def get_result(df, target, is_multiclass):
+    model1 = None
+    model2 = None
+    model3 = None
+    model4 = None
+    model5 = None
+    if is_multiclass:
+        model1 = LogisticRegression(max_iter=10000, multi_class="multinomial")
+    else:
+        model1 = LogisticRegression(max_iter=10000)
     model2 = GaussianNB()
     model3 = KNeighborsClassifier()
     model4 = RandomForestClassifier()
@@ -77,7 +85,7 @@ def classify_dataset(dataset):
     print("Training models...")
     # get results for complete dataset
     print("Training for all columns")
-    results = get_result(df, dataset["target"])
+    results = get_result(df, dataset["target"], dataset['is_multiclass'])
     print("Finished training... ")
     print("Writing Results... ")
     write_results(file, results, "nofs", k=len(df.columns)-1)
@@ -96,7 +104,8 @@ def classify_dataset(dataset):
             to_take.append(dataset["target"])
             selected_df = df[to_take]
 
-            results = get_result(selected_df, dataset["target"])
+            results = get_result(
+                selected_df, dataset["target"], dataset['is_multiclass'])
             # write result for that k for that method
             print(f"Writing Results for {method} and k={k}... ")
             write_results(file, results, method, k=k)
