@@ -62,23 +62,23 @@ data_files = [
         "no_scale":["stroke", "gender", "ever_married", "work_type", "Residence_type", "smoking_status"],
         "is_multiclass":False
     },
-    # {
-    #     "name": "covtype",
-    #     "drop_columns": [],
-    #     "encode_columns": [],
-    #     "target": "Cover_Type",
-    #     "sep": ",",
-    #     "no_scale":["Cover_Type"],
-    #     "is_multiclass":True
-    # },
+    {
+        "name": "abalone",
+        "drop_columns": [],
+        "encode_columns": [],
+        "target": "Age Class",
+        "sep": ",",
+        "no_scale":["Age Class"],
+        "is_multiclass":True
+    },
     {
         "name": "wine",
         "drop_columns": [],
         "encode_columns": [],
         "target": "quality",
-        "sep": ";",
+        "sep": ",",
         "no_scale":["quality"],
-        "is_multiclass":True
+        "is_multiclass":False
     },
     {
         "name": "breast",

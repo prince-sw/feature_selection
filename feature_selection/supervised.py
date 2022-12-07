@@ -9,6 +9,7 @@ from sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier
 from boruta import BorutaPy
 from sklearn.model_selection import train_test_split
 from scipy.stats import pearsonr
+from feature_selection.unsupervised import *
 
 # 1
 
@@ -18,10 +19,10 @@ def randomforest_Selection(df_norm, label, k):
     clf.fit(df_norm, label)
     feature_imp = pd.Series(clf.feature_importances_,
                             index=df_norm.columns).sort_values(ascending=False)
-    selected_col = []
-    for i in range(len(df_norm.columns)):
-        if clf.feature_importances_[i] >= 0.02:
-            selected_col.append(df_norm.columns[i])
+    # selected_col = []
+    # for i in range(len(df_norm.columns)):
+    #     if clf.feature_importances_[i] >= 0.02:
+    #         selected_col.append(df_norm.columns[i])
 
     selected_col = feature_imp[:min(k, len(df_norm.columns))].index
     return list(selected_col)
@@ -44,10 +45,10 @@ def Mutualinfo_selection(df_norm, label, k):
     mi = pd.Series(mi)
     mi.index = df_norm.columns
     mi.sort_values(ascending=False, inplace=True)
-    selected_col = []
-    for i in range(len(df_norm.columns)):
-        if mi.values[i] <= 0.1:
-            selected_col.append(df_norm.columns[i])
+    # selected_col = []
+    # for i in range(len(df_norm.columns)):
+    #     if mi.values[i] <= 0.1:
+    #         selected_col.append(df_norm.columns[i])
     selected_col = mi[:min(k, len(df_norm.columns))].index
     return list(selected_col)
 
@@ -144,28 +145,3 @@ def corr_selection(df_norm, label, k):
     score.index = df_norm.columns
     score.sort_values(ascending=False, inplace=True)
     return list(score[:min(k, len(df_norm.columns))].index)
-
-
-def get_features_selected(df, label, k):
-    features_selected = {}
-    print("Selecting Features with correlation")
-    features_selected["corr"] = corr_selection(df, label, k)
-    print("Selecting Features with tree")
-    features_selected["tree"] = treebased_selection(df, label, k)
-    print("Selecting Features with variance")
-    features_selected["var"] = variance_selection(df, label, k)
-    print("Selecting Features with logistic regression")
-    features_selected["lrs"] = logistic_regression_selection(df, label, k)
-    print("Selecting Features with rfe")
-    features_selected["rfe"] = rfe_selection(df, label, k)
-    print("Selecting Features with boruta")
-    features_selected["bor"] = boruta_selection(df, label, k)
-    print("Selecting Features with lasso")
-    features_selected["lass"] = Lasso_selection(df, label, k)
-    print("Selecting Features with mutual info")
-    features_selected["muin"] = Mutualinfo_selection(df, label, k)
-    print("Selecting Features with chi test")
-    features_selected["chi"] = chitest_selection(df, label, k)
-    print("Selecting Features with random forest")
-    features_selected["rfc"] = randomforest_Selection(df, label, k)
-    return features_selected

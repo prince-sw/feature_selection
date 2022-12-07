@@ -4,14 +4,14 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 fs_methods = ['corr', 'tree', 'var', 'lrs',
-              'rfe', 'bor', 'lass', 'muin', 'chi', 'rfc']
+              'rfe', 'bor', 'lass', 'muin', 'chi', 'rfc', 'ulap', 'uilap', 'ucos', 'upcorr', 'ufrufs']
 
 models = ['lr', 'nb', 'knn', 'rf', 'dt']
 
 
 def save_heatmap(dataset, scores, k):
     sns.heatmap(scores, xticklabels=fs_methods,
-                yticklabels=models, square=True, cmap=sns.color_palette("Blues", 12))
+                yticklabels=models, square=True, cmap=sns.color_palette("Blues", 12), annot=True)
     plt.title("Accuracy Heatmap for {}, k={}".format(dataset, k))
     plt.savefig('./plots/heatmap/{}.png'.format(dataset))
     plt.close()

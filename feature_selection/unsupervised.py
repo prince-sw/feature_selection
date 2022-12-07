@@ -25,7 +25,7 @@ def iterlaplacian_selection(df, k):
     return ilsfs
 
 
-def corr_selection(df, k):
+def pairwise_corr_selection(df, k):
     corr = df.corr(method='pearson')
     removed_columns = []
     threshold = 0.75
@@ -35,7 +35,9 @@ def corr_selection(df, k):
                 removed_columns.append(corr.columns[i])
     removed_columns = list(set(removed_columns))
     selected_cols = [x for x in df.columns if x not in removed_columns]
-    return selected_cols
+    if len(selected_cols) < k:
+        selected_cols.extend(removed_columns[:(k-len(selected_cols))])
+    return selected_cols[:min(k, len(df.columns))]
 
 
 def frufs_selection(df, k):

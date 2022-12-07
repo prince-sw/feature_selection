@@ -3,7 +3,7 @@ import pandas as pd
 from datasets.config import data_files
 
 fs_methods = ['corr', 'tree', 'var', 'lrs',
-              'rfe', 'bor', 'lass', 'muin', 'chi', 'rfc']
+              'rfe', 'bor', 'lass', 'muin', 'chi', 'rfc', 'ulap', 'uilap', 'ucos', 'upcorr', 'ufrufs']
 
 models = ['lr', 'nb', 'knn', 'rf', 'dt']
 

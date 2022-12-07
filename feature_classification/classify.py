@@ -8,7 +8,7 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import cross_validate
 from sklearn.metrics import accuracy_score, make_scorer, f1_score, precision_score, recall_score, roc_auc_score
 from datasets.data import clear_missing, encode_cols, drop_cols, scale_dataset
-from feature_selection.supervised import get_features_selected
+from feature_selection.feature_selector import feature_selector
 
 scoring = {
     "accuracy": make_scorer(accuracy_score),
@@ -41,9 +41,10 @@ def get_result(df, target, is_multiclass):
     model4 = None
     model5 = None
     if is_multiclass:
-        model1 = LogisticRegression(max_iter=10000, multi_class="multinomial")
+        model1 = LogisticRegression(
+            max_iter=1000000, multi_class="multinomial")
     else:
-        model1 = LogisticRegression(max_iter=10000)
+        model1 = LogisticRegression(max_iter=1000000)
     model2 = GaussianNB()
     model3 = KNeighborsClassifier()
     model4 = RandomForestClassifier()
@@ -94,7 +95,7 @@ def classify_dataset(dataset):
     # run for every number of columns chosen
     for k in range(1, len(df.columns)-1):
         # get selected features using every method for one k
-        selected_features = get_features_selected(
+        selected_features = feature_selector(
             df.drop(dataset["target"], axis=1), df[dataset["target"]], k)
 
         # train for every selected features from each method and save that result

@@ -5,8 +5,8 @@ from observations.heatmap import plot_heatmaps
 
 if __name__ == "__main__":
     for dataset in data_files:
-        # classify_dataset(dataset)
-        pass
+        classify_dataset(dataset)
+        # pass
     print("Plotting Accuracy Graphs")
     save_acc_graphs()
     save_acc_table()
