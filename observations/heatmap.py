@@ -10,6 +10,7 @@ models = ['lr', 'nb', 'knn', 'rf', 'dt']
 
 
 def save_heatmap(dataset, scores, k):
+    plt.figure(figsize=(12, 4))
     sns.heatmap(scores, xticklabels=fs_methods,
                 yticklabels=models, square=True, cmap=sns.color_palette("Blues", 12), annot=True)
     plt.title("Accuracy Heatmap for {}, k={}".format(dataset, k))
