@@ -8,7 +8,7 @@ if __name__ == "__main__":
         # classify_dataset(dataset)
         pass
     print("Plotting Accuracy Graphs")
-    # save_acc_graphs()
-    # save_acc_table()
+    save_acc_graphs()
+    save_acc_table()
     plot_heatmaps()
     print("Exiting...\n")

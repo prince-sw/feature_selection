@@ -1,10 +1,13 @@
 import pandas as pd
 import numpy as np
-from sklearn.linear_model import LogisticRegression
+from sklearn import svm
+from xgboost import XGBClassifier
+from sklearn.linear_model import LogisticRegression, RidgeClassifier, Lasso
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier, AdaBoostClassifier
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.calibration import CalibratedClassifierCV
 from sklearn.model_selection import cross_validate
 from sklearn.metrics import accuracy_score, make_scorer, f1_score, precision_score, recall_score, roc_auc_score
 from datasets.data import clear_missing, encode_cols, drop_cols, scale_dataset
@@ -36,10 +39,6 @@ def write_results(file, results, fs_method, k):
 
 def get_result(df, target, is_multiclass):
     model1 = None
-    model2 = None
-    model3 = None
-    model4 = None
-    model5 = None
     if is_multiclass:
         model1 = LogisticRegression(
             max_iter=1000000, multi_class="multinomial")
@@ -49,12 +48,22 @@ def get_result(df, target, is_multiclass):
     model3 = KNeighborsClassifier()
     model4 = RandomForestClassifier()
     model5 = DecisionTreeClassifier()
+    model6 = GradientBoostingClassifier(n_estimators=100, learning_rate=0.1)
+    model7 = AdaBoostClassifier(n_estimators=100, learning_rate=0.1)
+    model8 = svm.SVC(kernel='linear', C=1, probability=True)
+    model9 = CalibratedClassifierCV(RidgeClassifier())
+    model10 = XGBClassifier()
     models = {
         "lr": model1,
         "nb": model2,
         "knn": model3,
         "rf": model4,
         "dt": model5,
+        "gb": model6,
+        "ab": model7,
+        "svc": model8,
+        "ri": model9,
+        "xgb": model10,
     }
     results = {}
     for model in models.keys():

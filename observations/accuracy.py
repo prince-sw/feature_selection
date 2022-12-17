@@ -1,11 +1,7 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 from datasets.config import data_files
-
-fs_methods = ['corr', 'tree', 'var', 'lrs',
-              'rfe', 'bor', 'lass', 'muin', 'chi', 'rfc', 'ulap', 'uilap', 'ucos', 'upcorr', 'ufrufs']
-
-models = ['lr', 'nb', 'knn', 'rf', 'dt']
+from observations.model_config import fs_methods, models
 
 
 def save_figs(k, scores, fs_method, name):
@@ -48,7 +44,12 @@ def save_acc_graphs():
                 "nb": [],
                 "knn": [],
                 "rf": [],
-                "dt": []
+                "dt": [],
+                "gb": [],
+                "ab": [],
+                "svc": [],
+                "ri": [],
+                "xgb": []
             }
             for i in range(1, columns):
                 for model in models:

@@ -2,15 +2,11 @@ from datasets.config import data_files
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-
-fs_methods = ['corr', 'tree', 'var', 'lrs',
-              'rfe', 'bor', 'lass', 'muin', 'chi', 'rfc', 'ulap', 'uilap', 'ucos', 'upcorr', 'ufrufs']
-
-models = ['lr', 'nb', 'knn', 'rf', 'dt']
+from observations.model_config import fs_methods, models
 
 
 def save_heatmap(dataset, scores, k):
-    plt.figure(figsize=(12, 4))
+    plt.figure(figsize=(16, 8))
     sns.heatmap(scores, xticklabels=fs_methods,
                 yticklabels=models, square=True, cmap=sns.color_palette("Blues", 12), annot=True)
     plt.title("Accuracy Heatmap for {}, k={}".format(dataset, k))
