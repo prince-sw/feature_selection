@@ -1,5 +1,50 @@
 data_files = [
     {
+        "name": "ilpd",
+        "drop_columns": [],
+        "encode_columns": ["a1"],
+        "target": "a10",
+        "sep": ",",
+        "no_scale":['a1'],
+        "is_multiclass":False
+    },
+    {
+        "name": "vcd",
+        "drop_columns": [],
+        "encode_columns": [],
+        "target": "A6",
+        "sep": ",",
+        "no_scale":[],
+        "is_multiclass":False
+    },
+    {
+        "name": "lymph",
+        "drop_columns": [],
+        "encode_columns": [],
+        "target": "a0",
+        "sep": ",",
+        "no_scale":[],
+        "is_multiclass":True
+    },
+    {
+        "name": "iono",
+        "drop_columns": [],
+        "encode_columns": [],
+        "target": "a34",
+        "sep": ",",
+        "no_scale":['a0', 'a1'],
+        "is_multiclass":False
+    },
+    {
+        "name": "krkp",
+        "drop_columns": [],
+        "encode_columns": [],
+        "target": "a36",
+        "sep": ",",
+        "no_scale":['a0', 'a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'a9', 'a10''a11', 'a12', 'a13', 'a14', 'a15', 'a16', 'a17', 'a18', 'a19', 'a20', 'a21', 'a22', 'a23', 'a24', 'a25', 'a26', 'a27', 'a28', 'a29', 'a30', 'a31', 'a32', 'a33', 'a34', 'a35'],
+        "is_multiclass":False
+    },
+    {
         "name": "iris",
         "drop_columns": ["Id"],
         "encode_columns": ["Species"],

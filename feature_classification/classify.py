@@ -12,6 +12,7 @@ from sklearn.model_selection import cross_validate
 from sklearn.metrics import accuracy_score, make_scorer, f1_score, precision_score, recall_score, roc_auc_score
 from datasets.data import clear_missing, encode_cols, drop_cols, scale_dataset
 from feature_selection.feature_selector import feature_selector
+from feature_selection.feature_selector import heuristic_features_selector
 
 scoring = {
     "accuracy": make_scorer(accuracy_score),
@@ -120,6 +121,23 @@ def classify_dataset(dataset):
             print(f"Writing Results for {method} and k={k}... ")
             write_results(file, results, method, k=k)
             print("Finished writing Results... ")
+
+    print("Starting with heuristic optimizers..")
+    selected_features = heuristic_features_selector(
+        df.drop(dataset["target"], axis=1), df[dataset["target"]])
+    for method in selected_features.keys():
+        # get the selected df columns with target
+        to_take = list(selected_features[method])
+        to_take.append(dataset["target"])
+        selected_df = df[to_take]
+
+        results = get_result(
+            selected_df, dataset["target"], dataset['is_multiclass'])
+        # write result for that k for that method
+        print(f"Writing Results for {method} and k={len(to_take)-1}... ")
+        write_results(file, results, method, k=len(to_take)-1)
+        print("Finished writing Results... ")
+
     file.close()
     print("Done with dataset {}.csv...\n".format(dataset["name"]))
 

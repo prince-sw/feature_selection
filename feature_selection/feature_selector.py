@@ -1,5 +1,6 @@
 from feature_selection.supervised import *
 from feature_selection.unsupervised import *
+from feature_selection.heuristic import *
 
 
 def feature_selector(df, label, k):
@@ -35,4 +36,20 @@ def feature_selector(df, label, k):
     features_selected["upcorr"] = pairwise_corr_selection(df, k)
     print("Selecting Features with frufs")
     features_selected["ufrufs"] = frufs_selection(df, k)
+    return features_selected
+
+
+def heuristic_features_selector(df, label):
+    features_selected = {}
+    print("Selecting heuristic based features...")
+    print("Selecting with genetic algorithm...")
+    features_selected["gen"] = genetic_algorithm(df, label)
+    print("Selecting with particle swarm algorithm...")
+    features_selected["ps"] = particleswarm_algorithm(df, label)
+    print("Selecting with manta ray foraging algorithm...")
+    features_selected["mrf"] = mantaray_optimization(df, label)
+    print("Selecting with golden ratio algorithm...")
+    features_selected["gr"] = goldenratio_optimizer(df, label)
+    print("Selecting with social mimic algorithm...")
+    features_selected["sm"] = socialmimic_optimizer(df, label)
     return features_selected
