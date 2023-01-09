@@ -1,6 +1,6 @@
 ## Introduction
 In this project, we have performed performance analysis of fifteen feature selection methods by comparing 'accuracy' performance metric of each method over five classifiction algorithms.
-We have used ten publically availabe datasets for this purpose.
+We have used ten publicly available datasets for this purpose.
 
 ### Feature Selection Methods Used:
 1. Pair-wise Correlation
